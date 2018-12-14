@@ -23,6 +23,9 @@
         private GameObject[] m_handSkeletonLines = new GameObject[m_kMaxSkeletonConnections];
         private LineRenderer[] m_handSkeletonConnectionRenderer = new LineRenderer[m_kMaxSkeletonConnections];
 
+        private string debug = "";
+        private LineRenderer line;
+        public GameObject cube;
 
         private Dictionary<ARHand.SkeletonPointName, ARHand.SkeletonPointEntry> m_handSkeletons = new Dictionary
             <ARHand.SkeletonPointName, ARHand.SkeletonPointEntry>();
@@ -33,6 +36,16 @@
         {
             m_hand = hand;
             m_handCamera = Camera.main;
+
+            cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            cube.transform.localScale = Vector3.one * 0.1f;
+            
+            line = gameObject.AddComponent<LineRenderer>();
+            line.startWidth = 0.1f;
+            line.endWidth = 0.1f;
+            line.enabled = false;
+//            line.SetPosition(0, new Vector3(-1, 0, 1));
+//            line.SetPosition(1, new Vector3(1, 0, 1));
 
             m_handBox = new GameObject("HandBox");
             m_handBox.transform.localScale = new Vector3(1f, 1f, 1f);
@@ -124,14 +137,35 @@
                 m_handSkeleton.SetActive(true);
                 //skeleton point 
                 m_hand.GetSkeletons(m_handSkeletons);
+                debug = "\n";
+                ARHand.SkeletonPointEntry root;
+                m_handSkeletons.TryGetValue(ARHand.SkeletonPointName.Root, out root);
+                if (!root.Equals(null))
+                {
+                    line.enabled = true;
+                    Vector3 virtualPosition = camera2WorldMatrix.MultiplyPoint(root.Coordinate);
+                    virtualPosition.x *= -1f;
+                    virtualPosition.y *= -1f;
+                    line.SetPosition(1, virtualPosition);
+                    cube.transform.position = virtualPosition; 
+                }
+//                else
+//                {
+//                    line.enabled = false;
+//                }
+                
+
+                
                 foreach (var skeleton in m_handSkeletons)
                 {
                     m_handSkeletonPoint[(int)skeleton.Key].name = skeleton.Key.ToString();
                     Vector3 positionInCameraSpace = skeleton.Value.Coordinate;
                     Vector3 positionInWorldSpace = camera2WorldMatrix.MultiplyPoint(positionInCameraSpace);
+                    debug += positionInWorldSpace + "\t"+positionInCameraSpace+"\n";
                     m_handSkeletonPoint[(int)skeleton.Key].transform.position = positionInWorldSpace;
                     m_handSkeletonPoint[(int)skeleton.Key].GetComponent<MeshRenderer>().material = m_skeletonMaterial;
                 }
+                
                 //skeleton connection
                 m_hand.GetSkeletonConnection(m_connections);
                 for (int i = 0; i < m_connections.Count; i++)
@@ -145,6 +179,7 @@
                     }
                     Vector3 startCameraCoord = skpStart.Coordinate;
                     Vector3 endCameraCoord = skpEnd.Coordinate;
+                    debug += i + "\t" + startCameraCoord + "\t" + endCameraCoord + "\n";
                     m_handSkeletonConnectionRenderer[i].SetPosition(0, camera2WorldMatrix.MultiplyPoint(startCameraCoord));
                     m_handSkeletonConnectionRenderer[i].SetPosition(1, camera2WorldMatrix.MultiplyPoint(endCameraCoord));
                 }
@@ -174,9 +209,9 @@
             if (m_hand.GetTrackingState() == ARTrackable.TrackingState.TRACKING)
             {
                 GUI.Label(new Rect(0, 0, 200, 200), string.Format("GuestureType:{0}\n HandType:{1}\n" +
-                    " GuestureCoord:{2}\n SkeletonCoord:{3}",
+                    " GuestureCoord:{2}\n SkeletonCoord:{3}\n Other:{4}",
                     m_hand.GetGestureType(), m_hand.GetHandType(), m_hand.GetGestureCoordinateSystemType(),
-                    m_hand.GetSkeletonCoordinateSystemType()), bb);
+                    m_hand.GetSkeletonCoordinateSystemType(), debug), bb);
             }
         }
     }
