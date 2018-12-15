@@ -87,14 +87,17 @@ namespace Scripts
                     || trackable is ARPoint)
                 {
                     ARAnchor anchor = singleHit.CreateAnchor();
+                    
+                    Vector3 anchorPosition = anchor.GetPose().position;
+                    anchorPosition.y += 0.5f;
 
                     if (world)
                     {
-                        world.transform.position = anchor.GetPose().position;
+                        world.transform.position = anchorPosition;
                     }
                     else
                     {
-                        world = Instantiate(worldPrefab, anchor.GetPose().position, Quaternion.identity);
+                        world = Instantiate(worldPrefab, anchorPosition, Quaternion.AngleAxis(-90, Vector3.left));
                     }
                     break;
                 }

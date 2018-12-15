@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.49641287, b: 0.5748173, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -380,7 +380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planePrefabs: {fileID: 1071887080811128, guid: f388447ad6c7c1f4b8fdfba45701062c,
     type: 3}
-  worldPrefab: {fileID: 4669653479038749556, guid: bd1dfa33c19465f4591cf86ca8c8fb7d,
+  worldPrefab: {fileID: 1722269894321433677, guid: c682507f181ac4cd48f76a44efe9d842,
     type: 3}
   projectilePrefab: {fileID: 1857387999719748984, guid: 08e0e02a2e1f2cb4b8af21c89f13b40f,
     type: 3}
