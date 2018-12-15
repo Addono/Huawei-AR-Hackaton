@@ -23,23 +23,30 @@ namespace Scripts
         public void Update()
         {
             _DrawPlane();
+            
             Touch touch;
             if (
                 ARFrame.GetTrackingState() == ARTrackable.TrackingState.TRACKING // Only check for touch if we are tracking our environment.
-                && Input.touchCount >= 1  // Check if we touched.
                 && (touch = Input.GetTouch(0)).phase == TouchPhase.Began) // Check if this is the start of the touch action
             {
-                if (Input.touchCount >= 2)
+                switch (Input.touchCount)
                 {
-                    world = null;
+                    case 1:
+                        _CreateProjectile();
+                        break;
+                    default:
+                        _CreateWorld(touch);
+                        break;
                 }
-                
-                _DrawARLogo(touch);
-
-                GameObject projectile = Instantiate(projectilePrefab, projectileSource.transform.position, projectileSource.transform.rotation);
-                Rigidbody rb = projectile.GetComponent<Rigidbody>();
-                rb.AddForce(Vector3.forward * 50);
             }
+        }
+
+        private void _CreateProjectile()
+        {
+            GameObject projectile = Instantiate(projectilePrefab, projectileSource.transform.position,
+                projectileSource.transform.rotation);
+            Rigidbody rb = projectile.GetComponent<Rigidbody>();
+            rb.AddRelativeForce(Vector3.forward * 200);
         }
 
         private void _DrawPlane()
@@ -53,8 +60,13 @@ namespace Scripts
             }
         }
 
-        private void _DrawARLogo(Touch touch)
+        private void _CreateWorld(Touch touch)
         {
+            if (world)
+            {
+                Destroy(world);
+            }
+            
             List<ARHitResult> hitResults = ARFrame.HitTest(touch);
             ARDebug.LogInfo("_DrawARLogo hitResults count {0}", hitResults.Count);
             foreach (ARHitResult singleHit in hitResults)
@@ -66,12 +78,7 @@ namespace Scripts
                 {
                     ARAnchor anchor = singleHit.CreateAnchor();
 
-                    if (!world)
-                    {
-                        world = Instantiate(worldPrefab, anchor.GetPose().position, Quaternion.identity);                        
-                    }
-                    
-//                    GameObject projectile = Instantiate(projectilePrefab, anchor.GetPose().position, anchor.GetPose().rotation);
+                    world = Instantiate(worldPrefab, anchor.GetPose().position, Quaternion.identity);                        
                     break;
                 }
             }

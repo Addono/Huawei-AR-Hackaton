@@ -681,10 +681,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 2
-  cloudProjectId: f55c96b9-e119-410f-b562-dc1bd38bc8b5
+  cloudProjectId: 75d01b87-6b2b-427b-9b34-e2f9e7a212e0
   framebufferDepthMemorylessMode: 0
-  projectName: unity-basics (1)
-  organizationId: tuukka-muukkonen
+  projectName: unity-basics
+  organizationId: addono
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
