@@ -11,9 +11,6 @@ namespace Scripts
         private GameObject pendingProjectile;
         private bool released;
         private Plane _slingshotPlane;
-        private float _slingshotOpacity = 1f;
-        private float _timeToFade = 1f;
-        private float _fadeDuration = 1f;
 
         private Vector3 _projectileToScreenDirection = Vector3.forward;
         public Vector3 ProjectileToScreenDirection
@@ -32,7 +29,7 @@ namespace Scripts
             );
             _slingshotPlane = new Plane(slingshot.transform.forward, slingshot.transform.position);
             
-            pendingProjectile = Instantiate(projectilePrefab, projectileSource.transform);
+            pendingProjectile = Instantiate(projectilePrefab, projectileSource.transform.position, projectileSource.transform.rotation);
         }
 
         public void Release()
@@ -44,8 +41,9 @@ namespace Scripts
 
             Rigidbody rb = pendingProjectile.GetComponent<Rigidbody>();
             rb.AddForce(force, ForceMode.VelocityChange);
-            
-            Destroy(slingshot, 3);
+
+            iTween.FadeTo(slingshot, 0f, .5f);
+            Destroy(slingshot, 3f);
             Destroy(pendingProjectile, 8);
         }
 
@@ -57,18 +55,11 @@ namespace Scripts
                     projectileSource.transform.position + .3f * _projectileToScreenDirection,
                     projectileSource.transform.rotation
                 );
+                slingshot.transform.rotation = projectileSource.transform.rotation;
             } else if (slingshot && released)
             {
                 Rigidbody rb = pendingProjectile.GetComponent<Rigidbody>();
                 rb.useGravity = ProjectileHasPassedSlingshot(); // Enable gravity after the projectile has passed the slingshot.
-
-                // Update the opacity of the slingshot
-                _timeToFade -= Time.deltaTime;
-                _slingshotOpacity = Math.Max(0, -_timeToFade * 100f / _fadeDuration);
-                
-                Color c = slingshot.GetComponent<MeshRenderer>().material.color;
-                c.a = _slingshotOpacity;
-                slingshot.GetComponent<MeshRenderer>().material.color = c;
             }
         }
 

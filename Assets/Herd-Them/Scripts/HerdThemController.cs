@@ -38,19 +38,25 @@ namespace Scripts
                         switch (touch.phase)
                         {
                             case TouchPhase.Began:
+                                if (slingshot) // Cleanup in case we missed the touch phase end or release
+                                {
+                                    slingshot.Release();
+                                }
+                                
                                 slingshot = world.AddComponent<Slingshot>();
                                 slingshot.Create(slingshotPrefab, projectilePrefab, projectileSource);
                                 
                                 if (Camera.main != null)
                                     slingshot.ProjectileToScreenDirection = Camera.main.ScreenPointToRay(touch.position).direction * 0.5f;
                                 break;
-                            case TouchPhase.Moved:
-                                if (Camera.main != null)
-                                    slingshot.ProjectileToScreenDirection = Camera.main.ScreenPointToRay(touch.position).direction * 0.5f;
-                                break;
                             case TouchPhase.Ended:
                             case TouchPhase.Canceled:
                                 slingshot.Release();
+                                slingshot = null;
+                                break;
+                            default:
+                                if (Camera.main != null)
+                                    slingshot.ProjectileToScreenDirection = Camera.main.ScreenPointToRay(touch.position).direction * 0.5f;
                                 break;
                         }
                         break;
