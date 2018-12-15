@@ -11,6 +11,7 @@
     public class WorldARController : MonoBehaviour
     {
         [Tooltip("plane visualizer")] public GameObject planePrefabs;
+        [Tooltip("projectile")] public GameObject projectilePrefab;
 
         [Tooltip("green logo visualizer")] public GameObject arDiscoveryLogoPlanePrefabs;
 
@@ -39,6 +40,7 @@
             for (int i = 0; i < newPlanes.Count; i++)
             {
                 GameObject planeObject = Instantiate(planePrefabs, Vector3.zero, Quaternion.identity, transform);
+                
                 planeObject.GetComponent<TrackedPlaneVisualizer>().Initialize(newPlanes[i]);
             }
         }

@@ -11,6 +11,14 @@
         public ARConfigPlaneFindingMode PlaneFindingMode =ARConfigPlaneFindingMode.ENABLE;
         public ARAugmentedImageDatabase AugmentedImageDatabase = null;
 
+        internal override ARConfigCameraLensFacing GetCameraLensFacing() { return ARConfigCameraLensFacing.REAR; }
+//        internal override void SetCameraLensFacing(ARConfigCameraLensFacing lensFacing)
+//        {
+//            if (lensFacing != ARConfigCameraLensFacing.REAR)
+//            {
+//                throw new NotImplementedException("Setting camera not supported");
+//            }
+//        }
         internal override ARAugmentedImageDatabase GetAugImgDataBaseHandle() { return AugmentedImageDatabase; }
         internal override ARConfigPlaneFindingMode GetPlaneFindingMode() { return PlaneFindingMode; }
         internal override void SetPlaneFindingMode(ARConfigPlaneFindingMode mode)
