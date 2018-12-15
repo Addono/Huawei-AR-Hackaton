@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Common;
 using HuaweiARInternal;
 using HuaweiARUnitySDK;
@@ -15,31 +16,49 @@ namespace Scripts
         [Tooltip("projectile")] public GameObject projectilePrefab;
         
         [Tooltip("projectile source")] public GameObject projectileSource;
+        
+        [Tooltip("slingshot")] public GameObject slingshotPrefab;
 
         private List<ARPlane> newPlanes = new List<ARPlane>();
 
         private GameObject world;
+        private Slingshot slingshot;
 
         public void Update()
         {
             _DrawPlane();
             
             Touch touch;
-            if (
-                ARFrame.GetTrackingState() == ARTrackable.TrackingState.TRACKING // Only check for touch if we are tracking our environment.
-                && (touch = Input.GetTouch(0)).phase == TouchPhase.Began) // Check if this is the start of the touch action
+            if (ARFrame.GetTrackingState() == ARTrackable.TrackingState.TRACKING) // Only check for touch if we are tracking our environment.
             {
+                touch = Input.GetTouch(0);
                 switch (Input.touchCount)
                 {
                     case 1:
-                        _CreateProjectile();
+                        switch (touch.phase)
+                        {
+                            case TouchPhase.Began:
+//                            _CreateProjectile();
+                                slingshot = world.AddComponent<Slingshot>();
+                                slingshot.Create(slingshotPrefab, projectilePrefab, projectileSource);
+                                break;
+                            case TouchPhase.Ended:
+                            case TouchPhase.Canceled:
+                                slingshot.Release();
+                                break;
+                        }
                         break;
                     default:
-                        _CreateWorld(touch);
+                        if (touch.phase == TouchPhase.Began)
+                        {
+                            _CreateWorld(touch);
+                        }
                         break;
                 }
             }
         }
+
+      
 
         private void _CreateProjectile()
         {
@@ -66,15 +85,14 @@ namespace Scripts
             {
                 Destroy(world);
             }
-            
             List<ARHitResult> hitResults = ARFrame.HitTest(touch);
             ARDebug.LogInfo("_DrawARLogo hitResults count {0}", hitResults.Count);
             foreach (ARHitResult singleHit in hitResults)
             {
                 ARTrackable trackable = singleHit.GetTrackable();
                 ARDebug.LogInfo("_DrawARLogo GetTrackable {0}", singleHit.GetTrackable());
-                if ((trackable is ARPlane && ((ARPlane) trackable).IsPoseInPolygon(singleHit.HitPose)) ||
-                    (trackable is ARPoint))
+                if (trackable is ARPlane && ((ARPlane) trackable).IsPoseInPolygon(singleHit.HitPose) 
+                    || trackable is ARPoint)
                 {
                     ARAnchor anchor = singleHit.CreateAnchor();
 

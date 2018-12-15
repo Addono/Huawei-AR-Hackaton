@@ -385,9 +385,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 1857387999719748984, guid: 08e0e02a2e1f2cb4b8af21c89f13b40f,
     type: 3}
   projectileSource: {fileID: 715657743}
-  arDiscoveryLogoPlanePrefabs: {fileID: 1985491152450146, guid: ef62c7a73c29d5f4888541bf8c7ed5dd,
-    type: 3}
-  arDiscoveryLogoPointPrefabs: {fileID: 1985491152450146, guid: 1ae83e20c253a6c4a90c6c3ba793fc5f,
+  slingshotPrefab: {fileID: 3714943113904178762, guid: 133bb9825d49eea4aa263b58f2bad924,
     type: 3}
 --- !u!1 &1850044781
 GameObject:
