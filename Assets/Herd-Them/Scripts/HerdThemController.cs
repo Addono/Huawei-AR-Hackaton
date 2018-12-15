@@ -78,7 +78,10 @@ namespace Scripts
                 {
                     ARAnchor anchor = singleHit.CreateAnchor();
 
-                    world = Instantiate(worldPrefab, anchor.GetPose().position, Quaternion.identity);                        
+                    Vector3 anchorPosition = anchor.GetPose().position;
+                    anchorPosition.y += 0.5f;
+
+                    world = Instantiate(worldPrefab, anchorPosition, Quaternion.AngleAxis(-90, Vector3.left));
                     break;
                 }
             }

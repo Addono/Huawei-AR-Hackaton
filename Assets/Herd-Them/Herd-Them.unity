@@ -380,7 +380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planePrefabs: {fileID: 1071887080811128, guid: f388447ad6c7c1f4b8fdfba45701062c,
     type: 3}
-  worldPrefab: {fileID: 4764272512900983779, guid: 8b53e0edeca1c4503b90f33e8877aa5e,
+  worldPrefab: {fileID: 1722269894321433677, guid: c682507f181ac4cd48f76a44efe9d842,
     type: 3}
   projectilePrefab: {fileID: 1857387999719748984, guid: 08e0e02a2e1f2cb4b8af21c89f13b40f,
     type: 3}
