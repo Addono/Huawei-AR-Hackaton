@@ -6,7 +6,7 @@ MonoImporter:
   defaultReferences:
   - planePrefabs: {fileID: 1071887080811128, guid: f388447ad6c7c1f4b8fdfba45701062c,
       type: 3}
-  - worldPrefab: {fileID: 5148951793817332163, guid: 12433fa629c804e7db1547005a2968b2,
+  - worldPrefab: {fileID: 4669653479038749556, guid: bd1dfa33c19465f4591cf86ca8c8fb7d,
       type: 3}
   - projectilePrefab: {fileID: 1857387999719748984, guid: 08e0e02a2e1f2cb4b8af21c89f13b40f,
       type: 3}

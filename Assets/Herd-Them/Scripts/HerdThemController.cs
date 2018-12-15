@@ -78,7 +78,15 @@ namespace Scripts
                 {
                     ARAnchor anchor = singleHit.CreateAnchor();
 
-                    world = Instantiate(worldPrefab, anchor.GetPose().position, Quaternion.identity);                        
+//                    Terrain terrain = GetComponent<Terrain>();
+//                    Vector3 terrainSize = terrain.terrainData.size;
+//
+                    Vector3 anchorPosition = anchor.GetPose().position;
+//                    anchorPosition.x += terrainSize.x / 2f;
+//                    anchorPosition.y -= terrainSize.y;
+//                    anchorPosition.z += terrainSize.z / 2f;
+                    
+                    world = Instantiate(worldPrefab, anchorPosition, Quaternion.identity);
                     break;
                 }
             }
