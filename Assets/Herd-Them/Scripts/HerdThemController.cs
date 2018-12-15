@@ -1,16 +1,16 @@
-﻿namespace Preview
-{
-    using UnityEngine;
-    using System.Collections.Generic;
-    using HuaweiARUnitySDK;
-    using System.Collections;
-    using System;
-    using HuaweiARInternal;
-    using Common;
+﻿using System.Collections.Generic;
+using Common;
+using HuaweiARInternal;
+using HuaweiARUnitySDK;
+using UnityEngine;
 
+namespace Scripts
+{
     public class HerdThemController : MonoBehaviour
     {
         [Tooltip("plane visualizer")] public GameObject planePrefabs;
+        
+        [Tooltip("projectile ")] public GameObject projectilePrefab;
 
         [Tooltip("green logo visualizer")] public GameObject arDiscoveryLogoPlanePrefabs;
 
