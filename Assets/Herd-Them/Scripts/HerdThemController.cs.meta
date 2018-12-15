@@ -1,11 +1,17 @@
 fileFormatVersion: 2
 guid: 17604754454c7484da27b4d012df7b66
-timeCreated: 1531295349
-licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - planePrefabs: {fileID: 1071887080811128, guid: f388447ad6c7c1f4b8fdfba45701062c,
+      type: 3}
+  - worldPrefab: {fileID: 5148951793817332163, guid: 12433fa629c804e7db1547005a2968b2,
+      type: 3}
+  - projectilePrefab: {fileID: 1857387999719748984, guid: 08e0e02a2e1f2cb4b8af21c89f13b40f,
+      type: 3}
+  - projectileSource: {fileID: 1120317170425192, guid: 6521fe5e83187674d971e43e5434c7de,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
