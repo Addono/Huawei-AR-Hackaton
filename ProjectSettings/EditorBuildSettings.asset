@@ -8,10 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/cannons.unity
     guid: 063ada764b0022c4592fc8cb24c382fe
-  - enabled: 1
+  - enabled: 0
     path: Assets/Examples/WorldARSample/preview.unity
     guid: 641edea85af9bb74b9fd4790dbeac0c6
   - enabled: 0
     path: Assets/Examples/AugmentedImage/Scenes/AugmentedImage.unity
     guid: 8e1258e545e697b49933746b26c103f4
+  - enabled: 1
+    path: Assets/Herd-Them/Herd-Them.unity
+    guid: 3d096558dac9a65469dba201cf544f4f
   m_configObjects: {}

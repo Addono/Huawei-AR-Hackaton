@@ -16,6 +16,6 @@ public class CannonBallCollision : MonoBehaviour {
 
 	private void OnCollisionEnter(Collision other)
 	{
-		Destroy(gameObject);
+//		Destroy(gameObject);
 	}
 }

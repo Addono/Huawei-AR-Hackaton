@@ -10,14 +10,15 @@ namespace Scripts
     {
         [Tooltip("plane visualizer")] public GameObject planePrefabs;
         
-        [Tooltip("projectile ")] public GameObject projectilePrefab;
+        [Tooltip("world")] public GameObject worldPrefab;        
+        
+        [Tooltip("projectile")] public GameObject projectilePrefab;
+        
+        [Tooltip("projectile source")] public GameObject projectileSource;
 
-        [Tooltip("green logo visualizer")] public GameObject arDiscoveryLogoPlanePrefabs;
-
-        [Tooltip("blue logo visualizer")] public GameObject arDiscoveryLogoPointPrefabs;
-
-        private List<ARAnchor> addedAnchors = new List<ARAnchor>();
         private List<ARPlane> newPlanes = new List<ARPlane>();
+
+        private GameObject world;
 
         public void Update()
         {
@@ -28,7 +29,16 @@ namespace Scripts
                 && Input.touchCount >= 1  // Check if we touched.
                 && (touch = Input.GetTouch(0)).phase == TouchPhase.Began) // Check if this is the start of the touch action
             {
+                if (Input.touchCount >= 2)
+                {
+                    world = null;
+                }
+                
                 _DrawARLogo(touch);
+
+                GameObject projectile = Instantiate(projectilePrefab, projectileSource.transform.position, projectileSource.transform.rotation);
+                Rigidbody rb = projectile.GetComponent<Rigidbody>();
+                rb.AddForce(Vector3.forward * 50);
             }
         }
 
@@ -54,27 +64,14 @@ namespace Scripts
                 if ((trackable is ARPlane && ((ARPlane) trackable).IsPoseInPolygon(singleHit.HitPose)) ||
                     (trackable is ARPoint))
                 {
-                    GameObject prefab;
-                    if (trackable is ARPlane)
-                    {
-                        prefab = arDiscoveryLogoPlanePrefabs;
-                    }
-                    else
-                    {
-                        prefab = arDiscoveryLogoPointPrefabs;
-                    }
-
-                    if (addedAnchors.Count > 16)
-                    {
-                        ARAnchor toRemove = addedAnchors[0];
-                        toRemove.Detach();
-                        addedAnchors.RemoveAt(0);
-                    }
-
                     ARAnchor anchor = singleHit.CreateAnchor();
-                    var logoObject = Instantiate(prefab, anchor.GetPose().position, anchor.GetPose().rotation);
-                    logoObject.GetComponent<ARDiscoveryLogoVisualizer>().Initialize(anchor);
-                    addedAnchors.Add(anchor);
+
+                    if (!world)
+                    {
+                        world = Instantiate(worldPrefab, anchor.GetPose().position, Quaternion.identity);                        
+                    }
+                    
+//                    GameObject projectile = Instantiate(projectilePrefab, anchor.GetPose().position, anchor.GetPose().rotation);
                     break;
                 }
             }

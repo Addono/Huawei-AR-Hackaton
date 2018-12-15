@@ -112,6 +112,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &715657743 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1120317170425192, guid: 6521fe5e83187674d971e43e5434c7de,
+    type: 3}
+  m_PrefabInstance: {fileID: 2052152629}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &735104381
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,13 +378,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17604754454c7484da27b4d012df7b66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planePrefabs: {fileID: 1071887080811128, guid: 57a5268809d262243a9a593659000523,
+  planePrefabs: {fileID: 1071887080811128, guid: f388447ad6c7c1f4b8fdfba45701062c,
+    type: 3}
+  worldPrefab: {fileID: 4669653479038749556, guid: bd1dfa33c19465f4591cf86ca8c8fb7d,
     type: 3}
   projectilePrefab: {fileID: 1857387999719748984, guid: 08e0e02a2e1f2cb4b8af21c89f13b40f,
     type: 3}
+  projectileSource: {fileID: 715657743}
   arDiscoveryLogoPlanePrefabs: {fileID: 1985491152450146, guid: ef62c7a73c29d5f4888541bf8c7ed5dd,
     type: 3}
-  arDiscoveryLogoPointPrefabs: {fileID: 1985491152450146, guid: 41fa7d6c05eabe649a73542a7322d987,
+  arDiscoveryLogoPointPrefabs: {fileID: 1985491152450146, guid: 1ae83e20c253a6c4a90c6c3ba793fc5f,
     type: 3}
 --- !u!1 &1850044781
 GameObject:
