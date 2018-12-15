@@ -14,10 +14,4 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Examples/AugmentedImage/Scenes/AugmentedImage.unity
     guid: 8e1258e545e697b49933746b26c103f4
-  - enabled: 0
-    path: Assets/Examples/HandARSample/handAR.unity
-    guid: 9ffebb028f2f8b448b1f1ec03d78141d
-  - enabled: 0
-    path: Assets/Examples/3DHandSample/3DHandAR.unity
-    guid: ba5c275d7b378654fb012f35ffee5849
   m_configObjects: {}

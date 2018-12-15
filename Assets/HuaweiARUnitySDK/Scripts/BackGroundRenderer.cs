@@ -38,7 +38,6 @@
             if (ARFrame.IsDisplayGeometryChanged())
             {
                 transformedUVCoords = ARFrame.GetTransformDisplayUvCoords(QUAD_TEXCOORDS);
-                print(transformedUVCoords);
             }
 
             BackGroundMaterial.SetVector(leftTopBottom, new Vector4(transformedUVCoords[0], transformedUVCoords[1],
