@@ -38,9 +38,15 @@ namespace Scripts
                         switch (touch.phase)
                         {
                             case TouchPhase.Began:
-//                            _CreateProjectile();
                                 slingshot = world.AddComponent<Slingshot>();
                                 slingshot.Create(slingshotPrefab, projectilePrefab, projectileSource);
+                                
+                                if (Camera.main != null)
+                                    slingshot.ProjectileToScreenDirection = Camera.main.ScreenPointToRay(touch.position).direction * 0.5f;
+                                break;
+                            case TouchPhase.Moved:
+                                if (Camera.main != null)
+                                    slingshot.ProjectileToScreenDirection = Camera.main.ScreenPointToRay(touch.position).direction * 0.5f;
                                 break;
                             case TouchPhase.Ended:
                             case TouchPhase.Canceled:
@@ -58,16 +64,6 @@ namespace Scripts
             }
         }
 
-      
-
-        private void _CreateProjectile()
-        {
-            GameObject projectile = Instantiate(projectilePrefab, projectileSource.transform.position,
-                projectileSource.transform.rotation);
-            Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            rb.AddRelativeForce(Vector3.forward * 200);
-        }
-
         private void _DrawPlane()
         {
             newPlanes.Clear();
@@ -81,10 +77,6 @@ namespace Scripts
 
         private void _CreateWorld(Touch touch)
         {
-            if (world)
-            {
-                Destroy(world);
-            }
             List<ARHitResult> hitResults = ARFrame.HitTest(touch);
             ARDebug.LogInfo("_DrawARLogo hitResults count {0}", hitResults.Count);
             foreach (ARHitResult singleHit in hitResults)
@@ -96,7 +88,14 @@ namespace Scripts
                 {
                     ARAnchor anchor = singleHit.CreateAnchor();
 
-                    world = Instantiate(worldPrefab, anchor.GetPose().position, Quaternion.identity);                        
+                    if (world)
+                    {
+                        world.transform.position = anchor.GetPose().position;
+                    }
+                    else
+                    {
+                        world = Instantiate(worldPrefab, anchor.GetPose().position, Quaternion.identity);
+                    }
                     break;
                 }
             }
