@@ -8,7 +8,7 @@
     using HuaweiARInternal;
     using Common;
 
-    public class WorldARController : MonoBehaviour
+    public class HerdThemController : MonoBehaviour
     {
         [Tooltip("plane visualizer")] public GameObject planePrefabs;
 
