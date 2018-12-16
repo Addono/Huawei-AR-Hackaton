@@ -666,7 +666,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnInterval: 7
-  npc: {fileID: 238381599, guid: cceb9b28ff263448f9a07616f5b414f7, type: 3}
+  GoodPiggy: {fileID: 238381599, guid: cceb9b28ff263448f9a07616f5b414f7, type: 3}
+  BadPiggy: {fileID: 135022, guid: 6a89b113665847f418090d786dbbaf58, type: 3}
 --- !u!114 &2127816246541595072
 MonoBehaviour:
   m_ObjectHideFlags: 0
