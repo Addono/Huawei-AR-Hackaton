@@ -76,10 +76,9 @@ namespace Scripts
 
                 LineRenderer lr = indicator.GetComponent<LineRenderer>();
                 lr.positionCount = 50;
-                lr.SetPosition(0, projectileSource.transform.position + .5f * _projectileToScreenDirection);
 
                 Vector3 initial = Force();
-                for (int i = 1; i < 50; i++)
+                for (int i = 0; i < 50; i++)
                 {
                     float t = (i - 2) / 50f;
                     Vector3 output = initial * t + 0.5f * Physics.gravity * t * t;

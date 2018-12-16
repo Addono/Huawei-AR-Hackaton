@@ -116,7 +116,7 @@ namespace Scripts
                     }
                     else
                     {
-                        world = Instantiate(worldPrefab, anchorPosition, Quaternion.AngleAxis(-90, Vector3.left));
+                        world = Instantiate(worldPrefab, anchorPosition, Quaternion.identity);
                     }
                     break;
                 }
