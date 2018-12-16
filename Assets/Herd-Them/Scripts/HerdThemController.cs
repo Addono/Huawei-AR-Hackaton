@@ -97,7 +97,6 @@ namespace Scripts
                     ARAnchor anchor = singleHit.CreateAnchor();
                     
                     Vector3 anchorPosition = anchor.GetPose().position;
-                    anchorPosition.y += 0.5f;
 
                     if (world)
                     {

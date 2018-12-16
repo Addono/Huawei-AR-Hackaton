@@ -20,6 +20,7 @@ namespace Scripts
         private bool _waiting;
         private float _waitTimer;
         private bool _isStart;
+        private bool _hit;
 
         private void Start()
         {
@@ -42,12 +43,11 @@ namespace Scripts
 
         private void FixedUpdate()
         {
-            if (!IsOnMesh() && !_isStart)
+            if (_hit || (!IsOnMesh() && !_isStart))
             {
                 _navMeshAgent.enabled = false;
                 _rigidbody.isKinematic = false;
                 _rigidbody.useGravity = true;
-                Debug.Log("NOT on ground");
             }
             else
             {
@@ -82,6 +82,11 @@ namespace Scripts
                     }
                 }
             }
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            _hit = true;
         }
 
 

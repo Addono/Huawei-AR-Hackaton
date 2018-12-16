@@ -32,7 +32,7 @@ namespace Scripts
             );
             _slingshotPlane = new Plane(slingshot.transform.forward, slingshot.transform.position);
             
-            pendingProjectile = Instantiate(projectilePrefab, projectileSource.transform.position, projectileSource.transform.rotation);
+            pendingProjectile = Instantiate(projectilePrefab, projectileSource.transform.position, UnityEngine.Random.rotationUniform);
             Rigidbody rb = pendingProjectile.GetComponent<Rigidbody>();
             rb.useGravity = false;
             rb.isKinematic = true;
@@ -54,6 +54,7 @@ namespace Scripts
             Destroy(slingshot, 3f);
             
             iTween.FadeTo(pendingProjectile, iTween.Hash("time", 0.5f, "delay", 7.5f, "alpha", 0));
+            iTween.ScaleTo(pendingProjectile, pendingProjectile.transform.localScale * 4f, 0.2f);
             Destroy(pendingProjectile, 8);
         }
 
