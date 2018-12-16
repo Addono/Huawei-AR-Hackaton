@@ -5,23 +5,30 @@ using UnityEngine;
 
 public class SpawnNpc : MonoBehaviour
 {
-
     public float SpawnInterval = 2f;
-    public GameObject npc;
-    
+    public GameObject GoodPiggy;
+    public GameObject BadPiggy;
+
     private float _time;
-    
+
     // Start is called before the first frame update
     void Start()
     {
-           
     }
 
     // Update is called once per frame
     private void Spawn()
     {
-       
-        Instantiate(npc, transform.position + Vector3.up * 3f, Quaternion.identity);
+        float badPiggyTeshold = 0.2f;
+        float random = Random.Range(0f, 1f);
+        if (random <= badPiggyTeshold)
+        {
+            Instantiate(BadPiggy, transform.position + Vector3.up * 3f, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(GoodPiggy, transform.position + Vector3.up * 3f, Quaternion.identity);
+        }
     }
 
     void Update()
