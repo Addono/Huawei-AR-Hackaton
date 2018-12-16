@@ -6,6 +6,7 @@ namespace Scripts
     public class Slingshot : MonoBehaviour
     {
         private GameObject projectileSource;
+        private GameObject indicator;
         
         private GameObject slingshot;
         private GameObject pendingProjectile;
@@ -18,26 +19,27 @@ namespace Scripts
             set { _projectileToScreenDirection = value.normalized;}
         }
 
-        public void Create(GameObject slingshotPrefab, GameObject projectilePrefab, GameObject projectileSource)
+        public void Create(GameObject slingshotPrefab, GameObject projectilePrefab, GameObject projectileSource, GameObject indicator)
         {
             this.projectileSource = projectileSource;
+            this.indicator = indicator;
             
             slingshot = Instantiate(
                 slingshotPrefab, 
-                _relativeToCameraPosition(0.3f), 
+                _relativeToCameraPosition(0.3f, Vector3.forward), 
                 projectileSource.transform.rotation
             );
             _slingshotPlane = new Plane(slingshot.transform.forward, slingshot.transform.position);
             
             pendingProjectile = Instantiate(projectilePrefab, projectileSource.transform.position, projectileSource.transform.rotation);
+            pendingProjectile.GetComponent<Rigidbody>().useGravity = false;
         }
 
         public void Release()
         {
             released = true;
             
-            float power = (float) Math.Sqrt(1000f * Vector3.Distance(slingshot.transform.position, pendingProjectile.transform.position));
-            Vector3 force = power * (slingshot.transform.position - pendingProjectile.transform.position);
+            var force = Force();
 
             Rigidbody rb = pendingProjectile.GetComponent<Rigidbody>();
             rb.AddForce(force, ForceMode.VelocityChange);
@@ -45,6 +47,13 @@ namespace Scripts
             iTween.FadeTo(slingshot, 0f, .5f);
             Destroy(slingshot, 3f);
             Destroy(pendingProjectile, 8);
+        }
+
+        private Vector3 Force()
+        {
+            float power = (float) Math.Sqrt(1000f * Vector3.Distance(slingshot.transform.position, pendingProjectile.transform.position));
+            Vector3 force = power * (slingshot.transform.position - pendingProjectile.transform.position);
+            return force;
         }
 
         public void Update()
@@ -56,6 +65,20 @@ namespace Scripts
                     projectileSource.transform.rotation
                 );
                 slingshot.transform.rotation = projectileSource.transform.rotation;
+
+                LineRenderer lr = indicator.GetComponent<LineRenderer>();
+                lr.positionCount = 50;
+                lr.SetPosition(0, projectileSource.transform.position + .5f * _projectileToScreenDirection);
+//                lr.SetPosition(2, Vector3.zero);
+
+                Vector3 initial = Force();
+                for (int i = 1; i < 50; i++)
+                {
+                    float t = (i - 2) / 50f;
+                    Vector3 output = initial * t + 0.5f * Physics.gravity * t * t;
+                    lr.SetPosition(i, pendingProjectile.transform.position + output);
+                }
+
             } else if (slingshot && released)
             {
                 Rigidbody rb = pendingProjectile.GetComponent<Rigidbody>();
@@ -71,11 +94,6 @@ namespace Scripts
         private bool ProjectileHasPassedSlingshot()
         {
             return !_slingshotPlane.GetSide(projectileSource.transform.position);
-        }
-
-        private Vector3 _relativeToCameraPosition(float distance)
-        {
-            return _relativeToCameraPosition(distance, Vector3.forward);
         }
 
         private Vector3 _relativeToCameraPosition(float distance, Vector3 direction)

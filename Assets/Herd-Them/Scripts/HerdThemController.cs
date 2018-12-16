@@ -19,6 +19,8 @@ namespace Scripts
         
         [Tooltip("slingshot")] public GameObject slingshotPrefab;
 
+        [Tooltip("indicator")] public GameObject indicator;
+
         private List<ARPlane> newPlanes = new List<ARPlane>();
 
         private GameObject world;
@@ -44,7 +46,7 @@ namespace Scripts
                                 }
                                 
                                 slingshot = world.AddComponent<Slingshot>();
-                                slingshot.Create(slingshotPrefab, projectilePrefab, projectileSource);
+                                slingshot.Create(slingshotPrefab, projectilePrefab, projectileSource, indicator);
                                 
                                 if (Camera.main != null)
                                     slingshot.ProjectileToScreenDirection = Camera.main.ScreenPointToRay(touch.position).direction * 0.5f;
