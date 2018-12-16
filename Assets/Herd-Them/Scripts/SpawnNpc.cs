@@ -23,11 +23,11 @@ public class SpawnNpc : MonoBehaviour
         float random = Random.Range(0f, 1f);
         if (random <= badPiggyTeshold)
         {
-            Instantiate(BadPiggy, transform.position + Vector3.up * 3f, Quaternion.identity);
+            Instantiate(BadPiggy, transform.position + Vector3.up * 2f, Quaternion.identity);
         }
         else
         {
-            Instantiate(GoodPiggy, transform.position + Vector3.up * 3f, Quaternion.identity);
+            Instantiate(GoodPiggy, transform.position + Vector3.up * 2f, Quaternion.identity);
         }
     }
 

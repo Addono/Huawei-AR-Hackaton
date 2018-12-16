@@ -4,6 +4,7 @@ using Common;
 using HuaweiARInternal;
 using HuaweiARUnitySDK;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Scripts
 {
@@ -25,6 +26,16 @@ namespace Scripts
 
         private GameObject world;
         private Slingshot slingshot;
+
+        private int _score;
+        
+        public Text ScoreText;
+
+        private void Start()
+        {
+            _score = 0;
+            UpdateScore();
+        }
 
         public void Update()
         {
@@ -109,6 +120,23 @@ namespace Scripts
                     break;
                 }
             }
+        }
+
+        public void IncreaseScore()
+        {
+            _score += 1;
+            UpdateScore();
+        }
+
+        public void DecreaseScore()
+        {
+            _score -= 1;
+            UpdateScore();
+        }
+        
+        private void UpdateScore()
+        {
+            ScoreText.text = "Score: " + _score;
         }
     }
 }
