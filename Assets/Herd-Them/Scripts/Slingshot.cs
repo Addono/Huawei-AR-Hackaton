@@ -71,7 +71,6 @@ namespace Scripts
                 LineRenderer lr = indicator.GetComponent<LineRenderer>();
                 lr.positionCount = 50;
                 lr.SetPosition(0, projectileSource.transform.position + .5f * _projectileToScreenDirection);
-//                lr.SetPosition(2, Vector3.zero);
 
                 Vector3 initial = Force();
                 for (int i = 1; i < 50; i++)
