@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,10 +10,11 @@ namespace Scripts
 
         [SerializeField] public float TotalWaitTime = 2f;
 
-        [SerializeField] public List<Waypoint> PatrolPoints;
+        [SerializeField] public List<Transform> PatrolPoints;
 
         private NavMeshAgent _navMeshAgent;
         private Rigidbody _rigidbody;
+        private SpawnNpc _spawnNpc;
         private int _currentRandomIndex;
         private bool _travelling;
         private bool _waiting;
@@ -23,9 +23,12 @@ namespace Scripts
 
         private void Start()
         {
+            GameObject world = GameObject.FindWithTag("GameArea");
+            _spawnNpc = world.GetComponent<SpawnNpc>();
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _rigidbody = GetComponent<Rigidbody>();
             _isStart = true;
+            PatrolPoints = _spawnNpc.getPatrolPoints();
             if (PatrolPoints != null && PatrolPoints.Count >= 2)
             {
                 ChangePatrolPoint();
