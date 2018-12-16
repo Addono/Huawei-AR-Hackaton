@@ -39,7 +39,10 @@ namespace Scripts
 
         public void Update()
         {
-            _DrawPlane();
+            if (!world)
+            {
+                _DrawPlane();                
+            }
             
             Touch touch;
             if (ARFrame.GetTrackingState() == ARTrackable.TrackingState.TRACKING) // Only check for touch if we are tracking our environment.
@@ -108,7 +111,7 @@ namespace Scripts
                     ARAnchor anchor = singleHit.CreateAnchor();
                     
                     Vector3 anchorPosition = anchor.GetPose().position;
-
+                    
                     if (world)
                     {
                         world.transform.position = anchorPosition;
