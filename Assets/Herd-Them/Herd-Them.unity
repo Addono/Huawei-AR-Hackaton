@@ -99,7 +99,7 @@ NavMeshSettings:
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
-    agentSlope: 60
+    agentSlope: 29.6
     agentClimb: 1.18
     ledgeDropHeight: 1.36
     maxJumpAcrossDistance: 1.11
@@ -272,6 +272,73 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5044005607144589283, guid: c682507f181ac4cd48f76a44efe9d842,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 5044005607144589283, guid: c682507f181ac4cd48f76a44efe9d842,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 5044005607144589283, guid: c682507f181ac4cd48f76a44efe9d842,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 567161747, guid: c682507f181ac4cd48f76a44efe9d842, type: 3}
+      propertyPath: m_Carve
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1455238670, guid: c682507f181ac4cd48f76a44efe9d842, type: 3}
+      propertyPath: DebugDrawRadius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 865521523, guid: c682507f181ac4cd48f76a44efe9d842, type: 3}
+      propertyPath: DebugDrawRadius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 257409519, guid: c682507f181ac4cd48f76a44efe9d842, type: 3}
+      propertyPath: DebugDrawRadius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 389729194, guid: c682507f181ac4cd48f76a44efe9d842, type: 3}
+      propertyPath: DebugDrawRadius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1858423996, guid: c682507f181ac4cd48f76a44efe9d842, type: 3}
+      propertyPath: DebugDrawRadius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322599767, guid: c682507f181ac4cd48f76a44efe9d842, type: 3}
+      propertyPath: DebugDrawRadius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 52893973, guid: c682507f181ac4cd48f76a44efe9d842, type: 3}
+      propertyPath: DebugDrawRadius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1782940296, guid: c682507f181ac4cd48f76a44efe9d842, type: 3}
+      propertyPath: DebugDrawRadius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829565539, guid: c682507f181ac4cd48f76a44efe9d842, type: 3}
+      propertyPath: DebugDrawRadius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232714376, guid: c682507f181ac4cd48f76a44efe9d842, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.01036
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232714376, guid: c682507f181ac4cd48f76a44efe9d842, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00837
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232714377, guid: c682507f181ac4cd48f76a44efe9d842, type: 3}
+      propertyPath: DebugDrawRadius
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c682507f181ac4cd48f76a44efe9d842, type: 3}

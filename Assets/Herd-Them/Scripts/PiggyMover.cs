@@ -92,7 +92,7 @@ namespace Scripts
 
         private void SetDestination()
         {
-            Vector3 targetVector = PatrolPoints[_currentRandomIndex].transform.position;
+            Vector3 targetVector = Vector3.Scale(Random.insideUnitSphere, new Vector3(1,0,1)) * 0.4f + PatrolPoints[_currentRandomIndex].transform.position;
             _navMeshAgent.SetDestination(targetVector);
             _travelling = true;
         }
