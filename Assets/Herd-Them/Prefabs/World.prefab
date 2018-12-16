@@ -603,6 +603,7 @@ GameObject:
   - component: {fileID: 1150969312606310398}
   - component: {fileID: 6851123338114654298}
   - component: {fileID: 2891239198529148471}
+  - component: {fileID: 7831197462488280808}
   m_Layer: 0
   m_Name: World
   m_TagString: GameArea
@@ -706,6 +707,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnInterval: 2
   npc: {fileID: 238381599, guid: cceb9b28ff263448f9a07616f5b414f7, type: 3}
+--- !u!114 &7831197462488280808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722269894321433677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e29b104a581e4ddabb687104934614f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2647174527302114712
 GameObject:
   m_ObjectHideFlags: 0
