@@ -26,7 +26,6 @@ namespace Common
         {
             m_body = body;
             m_skeletonMaterial = new Material(Shader.Find("Diffuse"));
-
             for (int i = 0; i < m_maxSkeletonCnt; i++)
             {
                 m_skeletonPointObject[i] = GameObject.CreatePrimitive(PrimitiveType.Sphere);

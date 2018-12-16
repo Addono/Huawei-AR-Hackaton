@@ -19,6 +19,8 @@ namespace Scripts
         
         [Tooltip("slingshot")] public GameObject slingshotPrefab;
 
+        [Tooltip("indicator")] public GameObject indicator;
+
         private List<ARPlane> newPlanes = new List<ARPlane>();
 
         private GameObject world;
@@ -38,19 +40,25 @@ namespace Scripts
                         switch (touch.phase)
                         {
                             case TouchPhase.Began:
-                                slingshot = world.AddComponent<Slingshot>();
-                                slingshot.Create(slingshotPrefab, projectilePrefab, projectileSource);
+                                if (slingshot) // Cleanup in case we missed the touch phase end or release
+                                {
+                                    slingshot.Release();
+                                }
                                 
-                                if (Camera.main != null)
-                                    slingshot.ProjectileToScreenDirection = Camera.main.ScreenPointToRay(touch.position).direction * 0.5f;
-                                break;
-                            case TouchPhase.Moved:
+                                slingshot = world.AddComponent<Slingshot>();
+                                slingshot.Create(slingshotPrefab, projectilePrefab, projectileSource, indicator);
+                                
                                 if (Camera.main != null)
                                     slingshot.ProjectileToScreenDirection = Camera.main.ScreenPointToRay(touch.position).direction * 0.5f;
                                 break;
                             case TouchPhase.Ended:
                             case TouchPhase.Canceled:
                                 slingshot.Release();
+                                slingshot = null;
+                                break;
+                            default:
+                                if (Camera.main != null)
+                                    slingshot.ProjectileToScreenDirection = Camera.main.ScreenPointToRay(touch.position).direction * 0.5f;
                                 break;
                         }
                         break;
