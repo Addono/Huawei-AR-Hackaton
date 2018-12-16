@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Scripts
 {
@@ -32,7 +33,8 @@ namespace Scripts
             _slingshotPlane = new Plane(slingshot.transform.forward, slingshot.transform.position);
             
             pendingProjectile = Instantiate(projectilePrefab, projectileSource.transform.position, projectileSource.transform.rotation);
-            pendingProjectile.GetComponent<Rigidbody>().useGravity = false;
+            Rigidbody rb = pendingProjectile.GetComponent<Rigidbody>();
+            rb.useGravity = false;
         }
 
         public void Release()
