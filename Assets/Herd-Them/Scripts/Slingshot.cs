@@ -35,6 +35,9 @@ namespace Scripts
             pendingProjectile = Instantiate(projectilePrefab, projectileSource.transform.position, projectileSource.transform.rotation);
             Rigidbody rb = pendingProjectile.GetComponent<Rigidbody>();
             rb.useGravity = false;
+            rb.isKinematic = true;
+            
+            pendingProjectile.GetComponent<Material>().color = Color.black;
         }
 
         public void Release()
@@ -44,10 +47,13 @@ namespace Scripts
             var force = Force();
 
             Rigidbody rb = pendingProjectile.GetComponent<Rigidbody>();
+            rb.isKinematic = false;
             rb.AddForce(force, ForceMode.VelocityChange);
 
             iTween.FadeTo(slingshot, 0f, .5f);
             Destroy(slingshot, 3f);
+            
+            iTween.FadeTo(pendingProjectile, iTween.Hash("time", 0.5f, "delay", 7.5f, "alpha", 0));
             Destroy(pendingProjectile, 8);
         }
 
