@@ -26,7 +26,7 @@ namespace HuaweiARInternal
         }
         public static void LogWarning(string format, params object[] args)
         {
-            Debug.LogWarningFormat(format, args);
+//            Debug.LogWarningFormat(format, args);
         }
 
         public static void LogError(Object message)
